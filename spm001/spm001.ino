@@ -211,6 +211,12 @@ void onLongPressed(uint8_t pin) {
 
 void setup() {
   // put your setup code here, to run once:
+  if (storage.getFirst() != 1024) {
+    storage.format(20190523);
+    storage.setFirmware(10);
+    storage.setFirst(1024);
+  }
+
   buzzer.play();
   Serial.begin(9600);
 
