@@ -1,3 +1,6 @@
+#include <Arduino.h>
+#line 1 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+#line 1 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
 /*
     Project     :   Sulit Piso Multipurpose
     Version     :   2.5
@@ -34,6 +37,31 @@ uint8_t index = 0;
 String space = " ";
 bool isLimit = false;
 
+#line 37 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+void cbLimit();
+#line 44 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+void cbPower();
+#line 51 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+void cbDisplay();
+#line 56 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+void cbLcd1602();
+#line 129 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+void cbInterrupt();
+#line 138 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+void serialEvent();
+#line 151 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+void onReceived(void);
+#line 159 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+void onCoin();
+#line 164 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+void onShortPressed(uint8_t pin);
+#line 198 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+void onLongPressed(uint8_t pin);
+#line 207 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+void setup();
+#line 252 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+void loop();
+#line 37 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
 void cbLimit() {
   uint32_t amount = storage.getCurrentAmount();
   uint32_t limit = storage.getLimit();
@@ -261,3 +289,4 @@ void loop() {
 
   WatchDog::reset();
 }
+

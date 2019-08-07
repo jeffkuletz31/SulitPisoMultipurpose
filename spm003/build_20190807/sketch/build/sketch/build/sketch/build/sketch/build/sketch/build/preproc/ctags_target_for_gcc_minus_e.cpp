@@ -1,23 +1,33 @@
+# 1 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+# 1 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
 /*
-    Project     :   Sulit Piso Multipurpose
-    Version     :   2.5
+
+    Project     :   Sulit Piso Charge
+
+    Version     :   2.2
+
+
 
     Created by  :   Rhalf Wendel Caacbay
+
     Email       :   rhalfcaacbay@gmail.com
 
+
+
 */
-#include<LiquidCrystal_I2C.h>
+# 9 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino"
+# 10 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino" 2
 //#include<U8g2lib.h>
-#include<Timer.h>
-#include<Terminal.h>
-#include<Buzzer.h>
-#include<BillCoinAcceptor.h>
-#include<Storage.h>
-#include<Protocol.h>
-#include<Button.h>
-#include<Device.h>
-#include<Helper.h>
-#include<WatchDog.h>
+# 12 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino" 2
+# 13 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino" 2
+# 14 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino" 2
+# 15 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino" 2
+# 16 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino" 2
+# 17 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino" 2
+# 18 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino" 2
+# 19 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino" 2
+
+# 21 "C:\\Users\\rhalfcaacbay\\Documents\\GitHub\\SulitPisoMultipurpose\\spm003\\spm003.ino" 2
 
 //U8G2_ST7920_128X64_1_SW_SPI u8g2(U8G2_R0, /* clock=*/ 12, /* data=*/ 11, /* CS=*/ 10, /* reset=*/ 100);
 Timer tDisplay(Timer::MILLIS), tInterrupt(Timer::MILLIS), tLimit(Timer::MILLIS), tPower(Timer::MILLIS);
@@ -68,7 +78,7 @@ void cbLcd1602() {
     lcd.print(helper.padding(Device::getAmount(), space, 16));
     lcd.setCursor(8, 1);
     lcd.print(helper.toUtf8Currency(storage.getCurrentAmount()));
-  }  else if (Timer::getSeconds() >= 6 && Timer::getSeconds() < 9) {
+  } else if (Timer::getSeconds() >= 6 && Timer::getSeconds() < 9) {
     lcd.setCursor(0, 0);
     lcd.print(helper.padding(Device::getServe(), space, 16));
     lcd.setCursor(8, 0);
@@ -77,20 +87,20 @@ void cbLcd1602() {
     lcd.print(helper.padding(Device::getCredit(), space, 16));
     lcd.setCursor(8, 1);
     lcd.print(helper.toUtf8Currency(storage.getCurrentCredit()));
-//  } else if (Timer::getSeconds() >= 9 && Timer::getSeconds() < 12) {
-//    lcd.setCursor(0, 0);
-//    lcd.print(helper.padding(Device::getPower(), space, 16));
-//    lcd.setCursor(8, 0);
-//    float pKwh  = storage.getPkwh() / 100.0;
-//    float power = storage.getCurrentPower() / 1000.0 / 1000.0;
-//    lcd.print(pKwh * power);
-//    lcd.setCursor(0, 1);
-//    lcd.print(helper.padding("", space, 16));
+  } else if (Timer::getSeconds() >= 9 && Timer::getSeconds() < 12) {
+    lcd.setCursor(0, 0);
+    lcd.print(helper.padding(Device::getPower(), space, 16));
+    lcd.setCursor(8, 0);
+    float pKwh = storage.getPkwh() / 100.0;
+    float power = storage.getCurrentPower() / 1000.0 / 1000.0;
+    lcd.print(pKwh * power);
+    lcd.setCursor(0, 1);
+    lcd.print(helper.padding("", space, 16));
 
   } else {
     lcd.setCursor(0, 0);
     lcd.print(helper.padding(Device::getCoin(), space, 16));
-    
+
     lcd.setCursor(8, 0);
     lcd.print(helper.padding(helper.toUtf8Currency(coinAcceptor.coinPulse), space, 16));
 
@@ -208,8 +218,8 @@ void setup() {
   // put your setup code here, to run once:
 
   if (storage.getFirst() != 1) {
-    storage.format(190807);
-    storage.setFirmware(25);
+    storage.format(190711);
+    storage.setFirmware(22);
     storage.setFirst(1);
   }
 
