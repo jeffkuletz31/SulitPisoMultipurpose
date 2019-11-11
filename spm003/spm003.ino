@@ -43,10 +43,11 @@ void cbLimit() {
 
 void cbPower() {
   //standby power consumption of device is 3watts therefore
-  //float power = 3000.0 / 60.0;
-  //power = 50
-  storage.incrementPower(50);
+  //float power = 50.0wh
+  storage.incrementPower(50); //50 milliwatts per hour
+  storage.incrementTime(3600);  // 3600 seconds per hour
 }
+
 
 void cbDisplay() {
   cbLcd1602();
@@ -162,10 +163,6 @@ void onCoin() {
 }
 
 void onShortPressed(uint8_t pin) {
-  coinAcceptor.coinPulse += storage.getMode();
-
-  //check if coin inserted
-  if (coinAcceptor.coinPulse == 0 ) return;
   //Process
   for (index = 0; index < 4; index++) {
     if (buttons[index].getPin() == pin) {
@@ -173,15 +170,24 @@ void onShortPressed(uint8_t pin) {
       if (!terminals[index].getState())
         if (coinAcceptor.coinPulse < storage.getMinimum())
           continue;
-      //process
-      buzzer.play();
 
       uint32_t coinValue = coinAcceptor.coinPulse;
-      uint32_t timeValue = coinAcceptor.coinPulse * storage.getRate();
+      uint32_t timeValue = coinValue * storage.getRate();
 
       //add to record
-      if (storage.getMode() == 0) storage.incrementAmount(coinValue);
-      if (storage.getMode() >= 1) storage.incrementCredit(coinValue);
+      if (storage.getMode() == 0) {
+        if (coinAcceptor.coinPulse == 0 ) return;
+        storage.incrementAmount(coinValue);
+      }
+
+      if (storage.getMode() == 1) {
+        uint8_t value = 1;
+        storage.incrementFree(value);
+        timeValue = value * storage.getRate();
+      }
+
+      //process
+      buzzer.play();
 
       //charger consumes 20watts per hour
       //float power = (20000.0 / 3600.0) * timeValue;
@@ -231,9 +237,9 @@ void setup() {
   tInterrupt.begin(Timer::FOREVER, 25, cbInterrupt);
 
   tLimit.begin(Timer::FOREVER, 10000, cbLimit);
-  tPower.begin(Timer::FOREVER, 60000, cbPower);
+  tPower.begin(Timer::FOREVER, 3600, cbPower);
 
-  tDisplay.start();
+  tDisplay.start();`
   tInterrupt.start();
 
   tLimit.start();
