@@ -239,7 +239,7 @@ void setup() {
   tLimit.begin(Timer::FOREVER, 10000, cbLimit);
   tPower.begin(Timer::FOREVER, 3600, cbPower);
 
-  tDisplay.start();`
+  tDisplay.start();
   tInterrupt.start();
 
   tLimit.start();
